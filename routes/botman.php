@@ -37,6 +37,13 @@ $botman->hears('contact.phone', function ($bot) { // The incoming message matche
     $bot->reply($phone);
 })->middleware($dialogflow);
 
+$botman->hears('contact.email', function ($bot) { // The incoming message matched the action on Dialogflow
+    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
+    $apiReply = $extras['apiReply'];
+    
+    $bot->reply($apiReply);
+})->middleware($dialogflow); // Apply matching middleware per hears command
+
 //////////////////////////////////////////
 //////////////////////////////////////////
 ////// Company
@@ -77,6 +84,19 @@ $botman->hears('marketing.social_media', function ($bot) { // The incoming messa
 
     $bot->reply($social_account);
 })->middleware($dialogflow);
+
+//////////////////////////////////////////
+//////////////////////////////////////////
+////// PaaS
+//////////////////////////////////////////
+//////////////////////////////////////////
+
+$botman->hears('paas.jobs', function ($bot) { // The incoming message matched the action on Dialogflow
+    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
+    $apiReply = $extras['apiReply'];
+    
+    $bot->reply($apiReply);
+})->middleware($dialogflow); // Apply matching middleware per hears command
 
 //////////////////////////////////////////
 //////////////////////////////////////////
