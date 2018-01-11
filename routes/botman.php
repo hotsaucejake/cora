@@ -10,23 +10,15 @@ $botman = resolve('botman');
 // Apply global "received" middleware
 $botman->middleware->received($dialogflow);
 
-// Apply matching middleware per hears command
 $botman->hears('smalltalk.*', function ($bot) { // The incoming message matched the action on Dialogflow
-    // Retrieve Dialogflow information:
-    $extras = $bot->getMessage()->getExtras();
+    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
     $apiReply = $extras['apiReply'];
-    $apiAction = $extras['apiAction'];
-    $apiIntent = $extras['apiIntent'];
     
     $bot->reply($apiReply);
-})->middleware($dialogflow);
+})->middleware($dialogflow); // Apply matching middleware per hears command
 
 $botman->hears('contact.phone', function ($bot) { // The incoming message matched the action on Dialogflow
-    // Retrieve Dialogflow information:
-    $extras = $bot->getMessage()->getExtras();
-    $apiReply = $extras['apiReply'];
-    $apiAction = $extras['apiAction'];
-    $apiIntent = $extras['apiIntent'];
+    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information:
     $location = $extras['apiParameters']['location'];
     $phone = Corus::getPhone($location);
 
@@ -34,11 +26,8 @@ $botman->hears('contact.phone', function ($bot) { // The incoming message matche
 })->middleware($dialogflow);
 
 $botman->hears('input.unknown', function ($bot) { // The incoming message matched the action on Dialogflow
-    // Retrieve Dialogflow information:
-    $extras = $bot->getMessage()->getExtras();
+    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information:
     $apiReply = $extras['apiReply'];
-    $apiAction = $extras['apiAction'];
-    $apiIntent = $extras['apiIntent'];
     
     $bot->reply($apiReply);
 })->middleware($dialogflow);
