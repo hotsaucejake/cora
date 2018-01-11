@@ -18,4 +18,22 @@ class Corus {
         }
     }
 
+    public static function getSocial($social = null) {
+        if($social == 'facebook') {
+            return 'You can find our Facebook page here: https://www.facebook.com/Corus360/';
+        } elseif ($social == 'twitter') {
+            return 'You can find our Twitter handle here: https://twitter.com/corus360';
+        } elseif ($social == 'instagram') {
+            return 'You can find our Instagram account here: https://www.instagram.com/corus360/';
+        } elseif ($social == 'youtube') {
+            return 'You can find our YouTube channel here: https://www.youtube.com/user/Corus360Videos';
+        } elseif ($social == 'google+') {
+            return 'You can find us on Google+ here: https://plus.google.com/101699694934043147244';
+        } elseif ($social == 'linkedin') {
+            return 'You can follow us on LinkedIn here: https://www.linkedin.com/company/corus360/';
+        } else {
+            return 'You can view our Social Stream here: http://corus360.com/newsroom/social-stream/';
+        }
+    }
+
 }
