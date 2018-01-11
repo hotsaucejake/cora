@@ -4,8 +4,8 @@
         <ul class="ChatLog">
             <li class="ChatLog__entry" v-for="(message, index) in messages" :key="index" :class="[{'ChatLog__entry_mine': message.isMine}, {'ChatLog__entry_button':message.buttons.length}]">
                 <img class="ChatLog__avatar" src="/logo.png" />
-                <p class="ChatLog__message" v-if="!message.buttons.length">{{ message.text }}</p>
-                <p class="ChatLog__message" v-else-if="message.buttons.length"><a :href="button.url" class="chatButton" @click="button.payload ? sendMessage(button.payload) : null" v-for="button in message.buttons">{{ button.text }}</a></p>
+                <p class="ChatLog__message" v-html="message.text">{{ message.text }}</p>
+                <p class="ChatLog__message" v-if="message.buttons.length"><a :href="button.url" class="chatButton" @click="button.payload ? sendMessage(button.payload) : null" v-for="button in message.buttons">{{ button.text }}</a></p>
             </li>
         </ul>
 
