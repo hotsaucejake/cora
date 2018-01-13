@@ -29,27 +29,19 @@ $botman->hears('smalltalk.*', function ($bot) { // The incoming message matched 
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-$botman->hears('contact.phone', function ($bot) { // The incoming message matched the action on Dialogflow
+$botman->hears('contact.*', function ($bot) { // The incoming message matched the action on Dialogflow
     $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information:
-    $location = $extras['apiParameters']['location'];
-    $phone = Corus::getPhone($location);
+    $apiReply = $extras['apiReply'];
+    $apiAction = $extras['apiAction'];
+    $apiIntent = $extras['apiIntent'];
 
-    $bot->reply($phone);
+    if($apiAction == 'contact.phone'){
+        $location = $extras['apiParameters']['location'];
+        $apiReply = Corus::getPhone($location);
+    }
+
+    $bot->reply($apiReply);
 })->middleware($dialogflow);
-
-$botman->hears('contact.email', function ($bot) { // The incoming message matched the action on Dialogflow
-    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
-    $apiReply = $extras['apiReply'];
-    
-    $bot->reply($apiReply);
-})->middleware($dialogflow); // Apply matching middleware per hears command
-
-$botman->hears('contact.directory', function ($bot) { // The incoming message matched the action on Dialogflow
-    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
-    $apiReply = $extras['apiReply'];
-    
-    $bot->reply($apiReply);
-})->middleware($dialogflow); // Apply matching middleware per hears command
 
 //////////////////////////////////////////
 //////////////////////////////////////////
@@ -104,6 +96,23 @@ $botman->hears('paas.jobs', function ($bot) { // The incoming message matched th
     
     $bot->reply($apiReply);
 })->middleware($dialogflow); // Apply matching middleware per hears command
+
+//////////////////////////////////////////
+//////////////////////////////////////////
+////// Services
+//////////////////////////////////////////
+//////////////////////////////////////////
+
+$botman->hears('services.*', function ($bot) { // The incoming message matched the action on Dialogflow
+    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
+    $apiReply = $extras['apiReply'];
+    $apiAction = $extras['apiAction'];
+    $apiIntent = $extras['apiIntent'];
+    
+    $bot->reply($apiReply);
+})->middleware($dialogflow); // Apply matching middleware per hears command
+
+
 
 //////////////////////////////////////////
 //////////////////////////////////////////
