@@ -85,9 +85,11 @@ $botman->hears('marketing.social_media', function ($bot) { // The incoming messa
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-$botman->hears('paas.jobs', function ($bot) { // The incoming message matched the action on Dialogflow
+$botman->hears('paas.*', function ($bot) { // The incoming message matched the action on Dialogflow
     $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
     $apiReply = $extras['apiReply'];
+    $apiAction = $extras['apiAction'];
+    $apiIntent = $extras['apiIntent'];
     
     $bot->reply($apiReply);
 })->middleware($dialogflow); // Apply matching middleware per hears command
