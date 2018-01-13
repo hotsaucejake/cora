@@ -109,7 +109,20 @@ $botman->hears('services.*', function ($bot) { // The incoming message matched t
     $bot->reply($apiReply);
 })->middleware($dialogflow); // Apply matching middleware per hears command
 
+//////////////////////////////////////////
+//////////////////////////////////////////
+////// Orders
+//////////////////////////////////////////
+//////////////////////////////////////////
 
+$botman->hears('orders.*', function ($bot) { // The incoming message matched the action on Dialogflow
+    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
+    $apiReply = $extras['apiReply'];
+    $apiAction = $extras['apiAction'];
+    $apiIntent = $extras['apiIntent'];
+    
+    $bot->reply($apiReply);
+})->middleware($dialogflow); // Apply matching middleware per hears command
 
 //////////////////////////////////////////
 //////////////////////////////////////////
