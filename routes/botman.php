@@ -49,16 +49,11 @@ $botman->hears('contact.*', function ($bot) { // The incoming message matched th
 //////////////////////////////////////////
 //////////////////////////////////////////
 
-$botman->hears('company.about', function ($bot) { // The incoming message matched the action on Dialogflow
+$botman->hears('company.*', function ($bot) { // The incoming message matched the action on Dialogflow
     $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
     $apiReply = $extras['apiReply'];
-    
-    $bot->reply($apiReply);
-})->middleware($dialogflow); // Apply matching middleware per hears command
-
-$botman->hears('company.founded', function ($bot) { // The incoming message matched the action on Dialogflow
-    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
-    $apiReply = $extras['apiReply'];
+    $apiAction = $extras['apiAction'];
+    $apiIntent = $extras['apiIntent'];
     
     $bot->reply($apiReply);
 })->middleware($dialogflow); // Apply matching middleware per hears command
