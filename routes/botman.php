@@ -44,6 +44,13 @@ $botman->hears('contact.email', function ($bot) { // The incoming message matche
     $bot->reply($apiReply);
 })->middleware($dialogflow); // Apply matching middleware per hears command
 
+$botman->hears('contact.directory', function ($bot) { // The incoming message matched the action on Dialogflow
+    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
+    $apiReply = $extras['apiReply'];
+    
+    $bot->reply($apiReply);
+})->middleware($dialogflow); // Apply matching middleware per hears command
+
 //////////////////////////////////////////
 //////////////////////////////////////////
 ////// Company
