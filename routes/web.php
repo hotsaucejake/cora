@@ -17,3 +17,7 @@ Route::get('/', function () {
 
 Route::match(['get', 'post'], '/botman', 'BotManController@handle');
 Route::get('/botman/tinker', 'BotManController@tinker');
+
+Route::group(['prefix' => 'test'], function() {
+    Route::get('/jokes',  'TestController@jokes');
+ });
