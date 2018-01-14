@@ -19,6 +19,13 @@ $botman->middleware->received($dialogflow);
 $botman->hears('smalltalk.*', function ($bot) { // The incoming message matched the action on Dialogflow
     $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
     $apiReply = $extras['apiReply'];
+    $apiAction = $extras['apiAction'];
+    $apiIntent = $extras['apiIntent'];
+
+    if($apiAction == 'smalltalk.jokes'){
+        $joke = json_decode(file_get_contents('http://api.icndb.com/jokes/random'));
+        $apiReply = $joke->value->joke;
+    }
     
     $bot->reply($apiReply);
 })->middleware($dialogflow); // Apply matching middleware per hears command
