@@ -13,6 +13,7 @@
         "php": ">=7.0",
         "arcanedev/log-viewer": "^4.4",
         "botman/botman": "~2.0",
+        "botman/driver-botframework": "^1.1",
         "botman/driver-cisco-spark": "^1.1",
         "botman/driver-nexmo": "^1.0",
         "botman/driver-web": "~1.0",
