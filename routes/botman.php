@@ -1,14 +1,18 @@
 <?php
 use App\Http\Controllers\BotManController;
 use BotMan\BotMan\Middleware\ApiAi;
+use App\Http\Middleware\LogReceived;
 use App\Classes\Corus;
 
 $dialogflow = ApiAi::create(env('DF_CORA_CLIENT'))->listenForAction();
+$logReceived = new LogReceived();
 
 $botman = resolve('botman');
 
 // Apply global "received" middleware
+$botman->middleware->received($logReceived);
 $botman->middleware->received($dialogflow);
+
 
 //////////////////////////////////////////
 //////////////////////////////////////////
