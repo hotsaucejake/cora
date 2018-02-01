@@ -45,12 +45,12 @@ class LogReceived implements Received
 
         } elseif($bot->getDriver() instanceof BotFrameworkDriver){
 
-            Log::info('BotFrameworkDriver');
+            Log::info(print_r($bot->getDriver(), true));
 
         } else {
 
             Log::info(print_r($bot->getDriver(), true));
-            
+
         }
 
         // Log::debug(print_r($bot, true));  // exceeds memory size
