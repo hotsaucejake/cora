@@ -65,6 +65,11 @@
             <a href="https://github.com/hotsaucejake/cora" target="_blank">GitHub</a>
         </div>
     </div>
+
+    <span class="skype-button bubble " data-bot-id="2d8cb166-d991-4426-98e7-53a890348832"></span>
+    <script src="https://swc.cdn.skype.com/sdk/v1/sdk.min.js"></script>
+
+
 </div>
 </body>
 </html>
