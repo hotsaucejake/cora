@@ -29,8 +29,8 @@ $botman->hears('smalltalk.*', function ($bot) { // The incoming message matched 
     $apiIntent = $extras['apiIntent'];
 
     if($apiAction == 'smalltalk.jokes'){
-        $joke = json_decode(file_get_contents('http://api.icndb.com/jokes/random'));
-        $apiReply = $joke->value->joke;
+        $joke = json_decode(file_get_contents('https://api.chucknorris.io/jokes/random?category=food'));
+        $apiReply = $joke->value;
     }
     
     $bot->reply($apiReply);
