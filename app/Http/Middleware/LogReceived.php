@@ -12,8 +12,10 @@ use BotMan\Drivers\BotFramework\BotFrameworkDriver;
 
 // save exchanges
 use App\NexmoExchange;
+use App\SkypeExchange;
 
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class LogReceived implements Received
 {
@@ -45,11 +47,42 @@ class LogReceived implements Received
 
         } elseif($bot->getDriver() instanceof BotFrameworkDriver){
 
-            Log::info(print_r($bot->getDriver(), true));
+            $payload = $message->getPayload(); // get the message payload (array)
+
+            if($payload->get('channelId') == 'skype'){ // checks to see if from skype
+
+                if($payload->get('type') == 'message') // ignore conversationUpdate
+                {
+                    $exchange = new SkypeExchange;
+
+                    $exchange->text = $payload->get('text');
+                    $exchange->type = $payload->get('type');
+                    $exchange->message_timestamp = Carbon::parse($payload->get('timestamp'))->toDateTimeString();
+                    $exchange->skype_id = $payload->get('id');
+                    $exchange->channel_id = $payload->get('channelId');
+                    $exchange->service_url = $payload->get('serviceUrl');
+                    $exchange->from_id = $payload->get('from')['id'];
+                    if(isset($payload->get('from')['name'])){ $exchange->from_name = $payload->get('from')['name']; } // checks to see if a name is set
+                    
+                    $exchange->save();
+
+                } elseif($payload->get('type') == 'conversationUpdate') {
+                    // do nothing
+                } else {
+                    Log::info(print_r($payload, true)); // log everything else
+                    Log::info('BotFrameworkDriver: Unknown Message Type');
+                }
+
+            } else {
+                Log::info(print_r($bot->getDriver(), true));
+                Log::info('BotFrameworkDriver: Unknown Channel ID');
+            }
+
 
         } else {
 
             Log::info(print_r($bot->getDriver(), true));
+            Log::info('Unknown Driver');
 
         }
 

@@ -47,8 +47,8 @@ class LogSending implements Sending
 
         } elseif($bot->getDriver() instanceof BotFrameworkDriver){
 
-            Log::info('BotFrameworkDriver');
             Log::info(print_r($payload, true));
+            Log::info('Outbound Response: BotFrameworkDriver');
 
         } else {
 
