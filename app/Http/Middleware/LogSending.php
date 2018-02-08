@@ -11,6 +11,8 @@ use BotMan\Drivers\BotFramework\BotFrameworkDriver;
 
 use App\NexmoExchange;
 use App\NexmoSend;
+use App\SkypeExchange;
+use App\SkypeSend;
 
 use Illuminate\Support\Facades\Log;
 
@@ -47,8 +49,21 @@ class LogSending implements Sending
 
         } elseif($bot->getDriver() instanceof BotFrameworkDriver){
 
-            Log::info(print_r($payload, true));
-            Log::info('Outbound Response: BotFrameworkDriver');
+            foreach($bot->getMessages() as $message)
+            {
+                $oldPayload = $message->getPayload();
+
+                if($oldPayload->get('channelId') == 'skype'){ // checks to see if from skype
+                    $exchange = SkypeExchange::where('from_id', $oldPayload->get('from')['id'])->latest()->first(); // find relevant exchange
+
+                    $send = new SkypeSend;
+                    $send->type = $payload['type'];
+                    $send->text = $payload['text'];
+
+                    $exchange->skypeSend()->save($send); // save outgoing message with the original exchange it belongs to
+                }
+                
+            }
 
         } else {
 
