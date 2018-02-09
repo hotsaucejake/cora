@@ -54,13 +54,24 @@ class LogSending implements Sending
                 $oldPayload = $message->getPayload();
 
                 if($oldPayload->get('channelId') == 'skype'){ // checks to see if from skype
-                    $exchange = SkypeExchange::where('from_id', $oldPayload->get('from')['id'])->latest()->first(); // find relevant exchange
 
-                    $send = new SkypeSend;
-                    $send->type = $payload['type'];
-                    $send->text = $payload['text'];
+                    if($oldPayload->get('type') == 'message') // checks to make sure not audio/video
+                    {
+                        $exchange = SkypeExchange::where('from_id', $oldPayload->get('from')['id'])->latest()->first(); // find relevant exchange
 
-                    $exchange->skypeSend()->save($send); // save outgoing message with the original exchange it belongs to
+                        $send = new SkypeSend;
+                        $send->type = $payload['type'];
+                        $send->text = $payload['text'];
+
+                        $exchange->skypeSend()->save($send); // save outgoing message with the original exchange it belongs to
+                    } else {
+                        Log::info(print_r($bot->getDriver(), true));
+                        Log::info('LogSending Middleware Skype: Unknown type');
+                    }
+
+                } else {
+                    Log::info(print_r($bot->getDriver(), true));
+                    Log::info('LogSending Middleware BotFrameworkDriver: Unknown Channel ID');
                 }
                 
             }
@@ -69,6 +80,7 @@ class LogSending implements Sending
 
             Log::info(print_r($bot->getDriver(), true));
             Log::info(print_r($payload, true));
+            Log::info('LogSending Middleware: Unknown Driver');
 
         }
 
