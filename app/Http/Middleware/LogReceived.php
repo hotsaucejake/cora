@@ -13,6 +13,7 @@ use BotMan\Drivers\BotFramework\BotFrameworkDriver;
 // save exchanges
 use App\NexmoExchange;
 use App\SkypeExchange;
+use App\MicrosoftTeamsExchange;
 
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
@@ -67,22 +68,54 @@ class LogReceived implements Received
                     $exchange->save();
 
                 } elseif($payload->get('type') == 'conversationUpdate') {
+
                     // do nothing
-                } else {
-                    Log::info(print_r($payload, true)); // log everything else
-                    Log::info('BotFrameworkDriver: Unknown Message Type');
+
+                } else { // log everything else skype
+
+                    Log::info(print_r($payload, true)); 
+                    Log::info('Log Received BotFrameworkDriver: Unknown Skype Message Type');
+
                 }
 
-            } else {
+            } elseif($payload->get('channelId') == 'msteams') { // checks to see if from microsoft teams
+
+                if($payload->get('type') == 'message') // ignore other message types
+                {
+                    $exchange = new MicrosoftTeamsExchange;
+
+                    $exchange->text = $payload->get('text');
+                    $exchange->text_format = $payload->get('textFormat');
+                    $exchange->type = $payload->get('type');
+                    $exchange->message_timestamp = Carbon::parse($payload->get('timestamp'))->toDateTimeString();
+                    $exchange->msteams_id = $payload->get('id');
+                    $exchange->channel_id = $payload->get('channelId');
+                    $exchange->service_url = $payload->get('serviceUrl');
+                    $exchange->from_id = $payload->get('from')['id'];
+                    if(isset($payload->get('from')['name'])){ $exchange->from_name = $payload->get('from')['name']; } // checks to see if a name is set
+                    if(isset($payload->get('from')['aadObjectId'])){ $exchange->aad_object_id = $payload->get('from')['aadObjectId']; } // checks to see if a name is set
+
+                    $exchange->save();
+
+                } else { // log everything else microsoft teams types
+
+                    Log::info(print_r($payload, true));
+                    Log::info('Log Received BotFrameworkDriver: Unknown Microsoft Teams Message Type');
+
+                }
+
+            } else { // log everything else microsoft teams
+
                 Log::info(print_r($bot->getDriver(), true));
-                Log::info('BotFrameworkDriver: Unknown Channel ID');
+                Log::info('Log Received BotFrameworkDriver: Unknown Channel ID');
+
             }
 
 
-        } else {
+        } else { // log everything else botframework drivers
 
             Log::info(print_r($bot->getDriver(), true));
-            Log::info('Unknown Driver');
+            Log::info('Log Received BotFrameworkDriver: Unknown Driver');
 
         }
 
