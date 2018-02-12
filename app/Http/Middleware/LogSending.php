@@ -13,6 +13,8 @@ use App\NexmoExchange;
 use App\NexmoSend;
 use App\SkypeExchange;
 use App\SkypeSend;
+use App\MicrosoftTeamsExchange;
+use App\MicrosoftTeamsSend;
 
 use Illuminate\Support\Facades\Log;
 
@@ -53,7 +55,7 @@ class LogSending implements Sending
             {
                 $oldPayload = $message->getPayload();
 
-                if($oldPayload->get('channelId') == 'skype'){ // checks to see if from skype
+                if($oldPayload->get('channelId') == 'skype') { // checks to see if from skype
 
                     if($oldPayload->get('type') == 'message') // checks to make sure not audio/video
                     {
@@ -69,6 +71,23 @@ class LogSending implements Sending
                         Log::info('LogSending Middleware Skype: Unknown type');
                     }
 
+                } elseif($oldPayload->get('channelId') == 'msteams') { // checks to see if from msteams
+                
+                    if($oldPayload->get('type') == 'message') // checks to make sure not audio/video
+                    {
+                        $exchange = MicrosoftTeamsExchange::where('from_id', $oldPayload->get('from')['id'])->latest()->first(); // find relevant exchange
+
+                        $send = new MicrosoftTeamsSend;
+                        $send->type = $payload['type'];
+                        $send->text = $payload['text'];
+
+                        $exchange->microsoftTeamsSend()->save($send); // save outgoing message with the original exchange it belongs to
+
+                    } else {
+                        Log::info(print_r($bot->getDriver(), true));
+                        Log::info('LogSending Middleware Microsoft Teams: Unknown type');
+                    }
+                
                 } else {
                     Log::info(print_r($bot->getDriver(), true));
                     Log::info('LogSending Middleware BotFrameworkDriver: Unknown Channel ID');
