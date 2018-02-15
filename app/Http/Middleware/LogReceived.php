@@ -9,11 +9,13 @@ use BotMan\BotMan\Messages\Incoming\IncomingMessage;
 // drivers to check for
 use BotMan\Drivers\Nexmo\NexmoDriver;
 use BotMan\Drivers\BotFramework\BotFrameworkDriver;
+use BotMan\Drivers\CiscoSpark\CiscoSparkDriver;
 
 // save exchanges
 use App\NexmoExchange;
 use App\SkypeExchange;
 use App\MicrosoftTeamsExchange;
+use App\CiscoSparkExchange;
 
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
@@ -112,10 +114,27 @@ class LogReceived implements Received
             }
 
 
+        } elseif($bot->getDriver() instanceof CiscoSparkDriver){
+            
+            $payload = $message->getPayload(); // get the message payload (array)
+            $exchange = new CiscoSparkExchange;
+
+            $exchange->cisco_id = $payload->id;
+            $exchange->room_id = $payload->roomId;
+            $exchange->room_type = $payload->roomType;
+            $exchange->text = $payload->text;
+            $exchange->person_id = $payload->personId;
+            $exchange->person_email = $payload->personEmail;
+            $exchange->message_timestamp = Carbon::parse($payload->created)->toDateTimeString();
+
+            $exchange->save();
+
         } else { // log everything else botframework drivers
 
             Log::info(print_r($bot->getDriver(), true));
-            Log::info('Log Received BotFrameworkDriver: Unknown Driver');
+            Log::info('Log Received: Unknown Driver');
+            Log::info(print_r($message->getPayload(), true));
+            Log::info('Log Received: Payload');
 
         }
 
