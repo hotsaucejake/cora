@@ -112,8 +112,6 @@ class LogSending implements Sending
                 $send->markdown = $payload['markdown'];
 
                 $exchange->ciscoSparkSend()->save($send); // save outgoing message with the original exchange it belongs to
-
-                Log::info($oldPayload->id);
             }
             
         } else {
