@@ -8,6 +8,7 @@ use BotMan\BotMan\Interfaces\Middleware\Sending;
 // drivers to check for
 use BotMan\Drivers\Nexmo\NexmoDriver;
 use BotMan\Drivers\BotFramework\BotFrameworkDriver;
+use BotMan\Drivers\CiscoSpark\CiscoSparkDriver;
 
 use App\NexmoExchange;
 use App\NexmoSend;
@@ -15,6 +16,8 @@ use App\SkypeExchange;
 use App\SkypeSend;
 use App\MicrosoftTeamsExchange;
 use App\MicrosoftTeamsSend;
+use App\CiscoSparkExchange;
+use App\CiscoSparkSend;
 
 use Illuminate\Support\Facades\Log;
 
@@ -95,6 +98,24 @@ class LogSending implements Sending
                 
             }
 
+        } elseif($bot->getDriver() instanceof CiscoSparkDriver){ 
+
+            foreach($bot->getMessages() as $message)
+            {
+                $oldPayload = $message->getPayload();
+
+                $exchange = CiscoSparkExchange::where('cisco_id', $oldPayload->id)->latest()->first(); // find relevant exchange
+
+                $send = new CiscoSparkSend;
+                $send->room_id = $payload['roomId'];
+                $send->text = $payload['text'];
+                $send->markdown = $payload['markdown'];
+
+                $exchange->ciscoSparkSend()->save($send); // save outgoing message with the original exchange it belongs to
+
+                Log::info($oldPayload->id);
+            }
+            
         } else {
 
             Log::info(print_r($bot->getDriver(), true));
