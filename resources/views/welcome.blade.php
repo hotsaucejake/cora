@@ -63,6 +63,7 @@
             <a href="/botman/tinker">Tinker</a>
             <a href="https://github.com/hotsaucejake/cora/wiki" target="_blank">Documentation</a>
             <a href="https://github.com/hotsaucejake/cora" target="_blank">GitHub</a>
+            <a href="{{ url('auth/azure') }}">Login</a>
         </div>
     </div>
 

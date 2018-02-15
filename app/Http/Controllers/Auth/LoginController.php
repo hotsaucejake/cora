@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Redirect;
+use Socialite;
+use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -35,5 +39,38 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+
+    public function redirectToProvider()
+    {
+         return Socialite::with('azure')->redirect();
+    }
+
+
+    public function handleProviderCallback()
+    {
+         try {
+            $azureUser = Socialite::with('azure')->user();
+         } catch (Exception $e){
+            return redirect('auth/azure');
+         }
+         $authUser = $this->findOrCreateUser($azureUser);
+         Auth::login($authUser, true);
+         return redirect()->intended('home');
+    }
+
+    
+    private function findOrCreateUser($user)
+    {
+         $authUser = User::where('azure_id', $user->id)->first();
+         if($authUser){
+            return $authUser;
+         }
+         return User::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'azure_id' => $user->id,
+         ]);
     }
 }
