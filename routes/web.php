@@ -21,9 +21,12 @@ Route::get('/botman/tinker', 'BotManController@tinker');
 Route::group(['prefix' => 'test'], function() {
     Route::get('/jokes',  'TestController@jokes');
  });
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('auth/azure', ['as' => 'auth/azure', 'uses' => 'Auth\LoginController@redirectToProvider']);
 Route::get('auth/azure/callback', ['as' => 'auth/azure/callback', 'uses' => 'Auth\LoginController@handleProviderCallback']);
+
+Route::get('/login', 'Auth\LoginController@redirectToProvider')->name('login');
