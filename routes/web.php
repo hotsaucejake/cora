@@ -21,3 +21,6 @@ Route::get('/botman/tinker', 'BotManController@tinker');
 Route::group(['prefix' => 'test'], function() {
     Route::get('/jokes',  'TestController@jokes');
  });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
