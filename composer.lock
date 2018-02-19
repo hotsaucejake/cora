@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6df7ff9b4f4c4e329db0f86f626651ea",
+    "content-hash": "8f5a024d6834084350e3b5d027ae56fe",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -202,6 +202,65 @@
                 "chatbot"
             ],
             "time": "2018-01-19T16:13:47+00:00"
+        },
+        {
+            "name": "botman/driver-amazon-alexa",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/botman/driver-amazon-alexa.git",
+                "reference": "cb42f5d240bd5bccb12e2b8d52ff4304129a077b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/botman/driver-amazon-alexa/zipball/cb42f5d240bd5bccb12e2b8d52ff4304129a077b",
+                "reference": "cb42f5d240bd5bccb12e2b8d52ff4304129a077b",
+                "shasum": ""
+            },
+            "require": {
+                "botman/botman": "~2.0",
+                "minicodemonkey/amazon-alexa-php": "^0.1.5",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "botman/studio-addons": "~1.0",
+                "ext-curl": "*",
+                "illuminate/contracts": "~5.5.0",
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BotMan\\Drivers\\AmazonAlexa\\Providers\\AmazonAlexaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BotMan\\Drivers\\AmazonAlexa\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcel Pociot",
+                    "email": "m.pociot@gmail.com"
+                }
+            ],
+            "description": "Amazon Alexa driver for BotMan",
+            "homepage": "http://github.com/botman/driver-amazon-alexa",
+            "keywords": [
+                "Alexa",
+                "Botman",
+                "amazon alexa",
+                "bot"
+            ],
+            "time": "2018-01-21T20:20:37+00:00"
         },
         {
             "name": "botman/driver-botframework",
@@ -1787,6 +1846,45 @@
                 "twitter"
             ],
             "time": "2016-08-17T00:36:58+00:00"
+        },
+        {
+            "name": "minicodemonkey/amazon-alexa-php",
+            "version": "0.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MiniCodeMonkey/amazon-alexa-php.git",
+                "reference": "006a1e1e775d8429574cde1a093a8b9a4da6a960"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MiniCodeMonkey/amazon-alexa-php/zipball/006a1e1e775d8429574cde1a093a8b9a4da6a960",
+                "reference": "006a1e1e775d8429574cde1a093a8b9a4da6a960",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Alexa\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathias Hansen",
+                    "email": "me@codemonkey.io"
+                }
+            ],
+            "description": "Amazon Alexa interface for PHP",
+            "time": "2015-11-29T21:50:59+00:00"
         },
         {
             "name": "monolog/monolog",
