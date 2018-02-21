@@ -48,6 +48,26 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12 m-t-30">
+            <h4 class="m-b-0">Unknown Responses</h4>
+            <p class="text-muted m-t-0 font-12">User exchanges that need a proper response</p>
+        </div>
+        @foreach($unknowns as $unknown)
+        <div class="col-md-3">
+            <div class="card card-outline-info">
+                <div class="card-header">
+                    <h4 class="m-b-0 text-white"><a href="/{{ $link }}/{{ $unknown->id }}" class="text-white">{{ $unknown->message_timestamp }}</a></h4></div>
+                <div class="card-body">
+                    <blockquote>
+                        <p>{{ $unknown->text }}</p>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
     
 @endsection
 

@@ -28,6 +28,7 @@ class ExchangesController extends Controller
     public function nexmo()
     {
         $title = 'Nexmo';
+        $link =  'nexmo';
         $exchanges = \App\NexmoExchange::all();
         $defaults = \App\NexmoSend::where('text', self::$default1)->orWhere('text', self::$default2)->get();
         $unknowns = collect();
@@ -40,7 +41,7 @@ class ExchangesController extends Controller
         $unknowns = $unknowns->sortByDesc('message_timestamp')->values();
 
 
-        return view('exchanges', compact('exchanges', 'title', 'unknowns'));
+        return view('exchanges', compact('exchanges', 'title', 'link', 'unknowns'));
     }
 
 
@@ -52,10 +53,20 @@ class ExchangesController extends Controller
     public function skype()
     {
         $title = 'Skype';
+        $link =  'skype';
         $exchanges = \App\SkypeExchange::all();
+        $defaults = \App\SkypeSend::where('text', self::$default1)->orWhere('text', self::$default2)->get();
+        $unknowns = collect();
+
+        foreach($defaults as $default)
+        {
+            $unknowns = $unknowns->push($default->skypeExchange);
+        }
+
+        $unknowns = $unknowns->sortByDesc('message_timestamp')->values();
         
 
-        return view('exchanges', compact('exchanges', 'title'));
+        return view('exchanges', compact('exchanges', 'title', 'link', 'unknowns'));
     }
 
 
@@ -67,10 +78,20 @@ class ExchangesController extends Controller
     public function spark()
     {
         $title = 'Cisco Spark';
+        $link =  'spark';
         $exchanges = \App\CiscoSparkExchange::all();
+        $defaults = \App\CiscoSparkSend::where('text', self::$default1)->orWhere('text', self::$default2)->get();
+        $unknowns = collect();
+
+        foreach($defaults as $default)
+        {
+            $unknowns = $unknowns->push($default->ciscoSparkExchange);
+        }
+
+        $unknowns = $unknowns->sortByDesc('message_timestamp')->values();
         
 
-        return view('exchanges', compact('exchanges', 'title'));
+        return view('exchanges', compact('exchanges', 'title', 'link', 'unknowns'));
     }
 
 
@@ -82,9 +103,19 @@ class ExchangesController extends Controller
     public function teams()
     {
         $title = 'Microsoft Teams';
+        $link =  'teams';
         $exchanges = \App\MicrosoftTeamsExchange::all();
+        $defaults = \App\MicrosoftTeamsSend::where('text', self::$default1)->orWhere('text', self::$default2)->get();
+        $unknowns = collect();
 
+        foreach($defaults as $default)
+        {
+            $unknowns = $unknowns->push($default->microsoftTeamsExchange);
+        }
 
-        return view('exchanges', compact('exchanges', 'title'));
+        $unknowns = $unknowns->sortByDesc('message_timestamp')->values();
+        
+
+        return view('exchanges', compact('exchanges', 'title', 'link', 'unknowns'));
     }
 }
