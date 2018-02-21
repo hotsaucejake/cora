@@ -3,7 +3,7 @@
 
     @include('layouts.monster.partials.head')
 
-    <body class="fix-header fix-sidebar card-no-border">
+    <body class="fix-header fix-sidebar logo-center card-no-border">
 
         <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
