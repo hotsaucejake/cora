@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard';
 
     /**
      * Create a new controller instance.
@@ -57,7 +57,7 @@ class LoginController extends Controller
          }
          $authUser = $this->findOrCreateUser($azureUser);
          Auth::login($authUser, true);
-         return redirect()->intended('home');
+         return redirect()->intended('dashboard');
     }
 
     
