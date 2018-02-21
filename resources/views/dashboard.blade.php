@@ -4,6 +4,10 @@
     Cora | Dashboard
 @endsection
 
+@section('breadcrumb-title')
+    Dashboard
+@endsection
+
 @section('content')
-    @include('layouts.monster.partials.example-content')
+    
 @endsection
