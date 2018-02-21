@@ -2,7 +2,7 @@
 <!-- footer -->
 <!-- ============================================================== -->
 <footer class="footer">
-    © 2017 Monster Admin by wrappixel.com
+    © {{ Carbon\Carbon::now()->year }} Corus360
 </footer>
 <!-- ============================================================== -->
 <!-- End footer -->
