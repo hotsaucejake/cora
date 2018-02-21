@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\NexmoExchange;
+use App\CiscoSparkExchange;
+use App\MicrosoftTeamsExchange;
+use App\SkypeExchange;
+
 class DashboardController extends Controller
 {
     /**
