@@ -15,25 +15,5 @@
 <script src="/monster/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
 <!--Custom JavaScript -->
 <script src="/monster/js/custom.min.js"></script>
-<!-- ============================================================== -->
-<!-- This page plugins -->
-<!-- ============================================================== -->
-<!-- chartist chart -->
-<script src="/monster/assets/plugins/chartist-js/dist/chartist.min.js"></script>
-<script src="/monster/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
-<script src="/monster/assets/plugins/echarts/echarts-all.js"></script>
-<!-- Vector map JavaScript -->
-<script src="/monster/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
-<script src="/monster/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
-<!-- Calendar JavaScript -->
-<script src="/monster/assets/plugins/moment/moment.js"></script>
-<script src="/monster/assets/plugins/calendar/dist/fullcalendar.min.js"></script>
-<script src="/monster/assets/plugins/calendar/dist/jquery.fullcalendar.js"></script>
-<script src="/monster/assets/plugins/calendar/dist/cal-init.js"></script>
-<!-- sparkline chart -->
-<script src="/monster/assets/plugins/sparkline/jquery.sparkline.min.js"></script>
-<script src="/monster/js/dashboard4.js"></script>
-<!-- ============================================================== -->
-<!-- Style switcher -->
-<!-- ============================================================== -->
-<script src="/monster/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+
+@yield('plugins')
