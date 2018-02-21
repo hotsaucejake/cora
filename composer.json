@@ -25,6 +25,7 @@
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "laravolt/avatar": "^2.0",
         "mpociot/slack-client": "^0.3.0",
         "socialiteproviders/microsoft-azure": "^3.0"
     },
