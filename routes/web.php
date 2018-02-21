@@ -31,3 +31,10 @@ Route::get('auth/azure', ['as' => 'auth/azure', 'uses' => 'Auth\LoginController@
 Route::get('auth/azure/callback', ['as' => 'auth/azure/callback', 'uses' => 'Auth\LoginController@handleProviderCallback']);
 
 Route::get('/login', 'Auth\LoginController@redirectToProvider')->name('login');
+
+Route::group(['prefix' => 'exchanges'], function () {
+    Route::get('/nexmo',         'ExchangesController@nexmo');
+    Route::get('/skype',         'ExchangesController@skype');
+    Route::get('/spark',         'ExchangesController@spark');
+    Route::get('/teams',         'ExchangesController@teams');
+});
