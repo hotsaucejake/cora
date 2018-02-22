@@ -38,3 +38,7 @@ Route::group(['prefix' => 'exchanges'], function () {
     Route::get('/spark',         'ExchangesController@spark');
     Route::get('/teams',         'ExchangesController@teams');
 });
+
+Route::group(['prefix' => 'documentation'], function () {
+    Route::get('/{slug}', 'DocumentationController@show');
+});

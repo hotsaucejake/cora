@@ -47,93 +47,93 @@
 
                 <li class="nav-small-cap">DOCUMENTATION</li>
                 <li>
-                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-lightbulb-on-outline"></i><span class="hide-menu">Core Concepts</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li class="">
-                            <a href="">Hearing Messages</a>
+                    <a class="has-arrow" href="" aria-expanded="false" data-toggle="collapse"><i class="mdi mdi-lightbulb-on-outline"></i><span class="hide-menu">Core Concepts</span></a>
+                    <ul aria-expanded="false" class="collapse" data-toggle="collapse">
+                        <li class="{{ request()->is('/documentation/hearing-messages') ? 'active' : '' }}">
+                            <a href="/documentation/hearing-messages">Hearing Messages</a>
                         </li>
-                        <li class="">
-                            <a href="">Hearing Attachments</a>
+                        <li class="{{ request()->is('/documentation/hearing-attachments') ? 'active' : '' }}">
+                            <a href="/documentation/hearing-attachments">Hearing Attachments</a>
                         </li>
-                        <li class="">
-                            <a href="">Sending Messages</a>
+                        <li class="{{ request()->is('/documentation/sending-messages') ? 'active' : '' }}">
+                            <a href="/documentation/sending-messages">Sending Messages</a>
                         </li>
-                        <li class="">
-                            <a href="">Conversations</a>
+                        <li class="{{ request()->is('/documentation/conversations') ? 'active' : '' }}">
+                            <a href="/documentation/conversations">Conversations</a>
                         </li>
-                        <li class="">
-                            <a href="">Events</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-math-compass"></i><span class="hide-menu">Advanced Topics</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li class="">
-                            <a href="">Natural Language Processing</a>
-                        </li>
-                        <li class="">
-                            <a href="">User Information</a>
-                        </li>
-                        <li class="">
-                            <a href="">Storing Information</a>
+                        <li class="{{ request()->is('/documentation/events') ? 'active' : '' }}">
+                            <a href="/documentation/events">Events</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-robot"></i><span class="hide-menu">Extending Cora</span></a>
+                    <a class="has-arrow" href="" aria-expanded="false"><i class="mdi mdi-math-compass"></i><span class="hide-menu">Advanced Topics</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li class="">
-                            <a href="">Middleware</a>
+                        <li class="{{ request()->is('/documentation/natural-language-processing') ? 'active' : '' }}">
+                            <a href="/documentation/natural-language-processing">Natural Language Processing</a>
                         </li>
-                        <li class="">
-                            <a href="">Drivers</a>
+                        <li class="{{ request()->is('/documentation/user-information') ? 'active' : '' }}">
+                            <a href="/documentation/user-information">User Information</a>
+                        </li>
+                        <li class="{{ request()->is('/documentation/storing-information') ? 'active' : '' }}">
+                            <a href="/documentation/storing-information">Storing Information</a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-wrench"></i><span class="hide-menu">Drivers</span></a>
+                    <a class="has-arrow" href="" aria-expanded="false"><i class="mdi mdi-robot"></i><span class="hide-menu">Extending Cora</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li class="">
-                            <a href="">Amazon Alexa</a>
+                        <li class="{{ request()->is('/documentation/middleware') ? 'active' : '' }}">
+                            <a href="/documentation/middleware">Middleware</a>
                         </li>
-                        <li class="">
-                            <a href="">Cisco Spark</a>
+                        <li class="{{ request()->is('/documentation/drivers') ? 'active' : '' }}">
+                            <a href="/documentation/drivers">Drivers</a>
                         </li>
-                        <li class="">
-                            <a href="">Facebook Messenger</a>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="" aria-expanded="false"><i class="mdi mdi-wrench"></i><span class="hide-menu">Drivers</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li class="{{ request()->is('/documentation/amazon-alexa') ? 'active' : '' }}">
+                            <a href="/documentation/amazon-alexa">Amazon Alexa</a>
                         </li>
-                        <li class="">
-                            <a href="">HipChat</a>
+                        <li class="{{ request()->is('/documentation/') ? 'active' : '' }}">
+                            <a href="/documentation/cisco-spark">Cisco Spark</a>
                         </li>
-                        <li class="">
-                            <a href="">Microsoft Bot Framework</a>
+                        <li class="{{ request()->is('/documentation/facebook-messenger') ? 'active' : '' }}">
+                            <a href="/documentation/facebook-messenger">Facebook Messenger</a>
                         </li>
-                        <li class="">
-                            <a href="">Nexmo</a>
+                        <li class="{{ request()->is('/documentation/hipchat') ? 'active' : '' }}">
+                            <a href="/documentation/hipchat">HipChat</a>
                         </li>
-                        <li class="">
-                            <a href="">Slack</a>
+                        <li class="{{ request()->is('/documentation/microsoft-bot-framework') ? 'active' : '' }}">
+                            <a href="/documentation/microsoft-bot-framework">Microsoft Bot Framework</a>
                         </li>
-                        <li class="">
-                            <a href="">Telegram</a>
+                        <li class="{{ request()->is('/documentation/nexmo') ? 'active' : '' }}">
+                            <a href="/documentation/nexmo">Nexmo</a>
                         </li>
-                        <li class="">
-                            <a href="">Twilio</a>
+                        <li class="{{ request()->is('/documentation/slack') ? 'active' : '' }}">
+                            <a href="/documentation/slack">Slack</a>
                         </li>
-                        <li class="">
-                            <a href="">Web</a>
+                        <li class="{{ request()->is('/documentation/telegram') ? 'active' : '' }}">
+                            <a href="/documentation/telegram">Telegram</a>
                         </li>
-                        <li class="">
-                            <a href="">WeChat</a>
+                        <li class="{{ request()->is('/documentation/twilio') ? 'active' : '' }}">
+                            <a href="/documentation/twilio">Twilio</a>
+                        </li>
+                        <li class="{{ request()->is('/documentation/web') ? 'active' : '' }}">
+                            <a href="/documentation/web">Web</a>
+                        </li>
+                        <li class="{{ request()->is('/documentation/wechat') ? 'active' : '' }}">
+                            <a href="/documentation/wechat">WeChat</a>
                         </li>
                     </ul>
                 </li>
                 <li class="{{ request()->is('/documentation/testing') ? 'active' : '' }}">
-                    <a href="/#"><i class="mdi mdi-test-tube"></i><span class="hide-menu">Testing</span></a>
+                    <a href="/documentation/testing"><i class="mdi mdi-test-tube"></i><span class="hide-menu">Testing</span></a>
                 </li>
                 <li class="{{ request()->is('/documentation/faq') ? 'active' : '' }}">
-                    <a href="/#"><i class="mdi mdi-comment-question-outline"></i><span class="hide-menu">FAQs</span></a>
+                    <a href="/documentation/faq"><i class="mdi mdi-comment-question-outline"></i><span class="hide-menu">FAQs</span></a>
                 </li>
             </ul>
         </nav>
