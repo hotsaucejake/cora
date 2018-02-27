@@ -169,6 +169,23 @@ $botman->hears('blockchain.*', function ($bot) { // The incoming message matched
     $bot->reply($apiReply);
 })->middleware($dialogflow); // Apply matching middleware per hears command
 
+
+//////////////////////////////////////////
+//////////////////////////////////////////
+////// Office 365
+//////////////////////////////////////////
+//////////////////////////////////////////
+
+$botman->hears('office365.*', function ($bot) { // The incoming message matched the action on Dialogflow
+    $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information
+    $apiReply = $extras['apiReply'];
+    $apiAction = $extras['apiAction'];
+    $apiIntent = $extras['apiIntent'];
+    
+    $bot->reply($apiReply);
+})->middleware($dialogflow); // Apply matching middleware per hears command
+
+
 //////////////////////////////////////////
 //////////////////////////////////////////
 ////// Default Fallback
