@@ -193,8 +193,19 @@ $botman->hears('office365.*', function ($bot) { // The incoming message matched 
 //////////////////////////////////////////
 
 $botman->hears('input.unknown', function ($bot) { // The incoming message matched the action on Dialogflow
+    $message = $bot->getMessage()->getText(); // Original received message
+
     $extras = $bot->getMessage()->getExtras(); // Retrieve Dialogflow information:
     $apiReply = $extras['apiReply'];
+
+    if(strpos($message, 'alexa_') !== false){
+        if(config('corus.' . str_replace('alexa_', '', $message))){
+            $bot->reply(config('corus.' . str_replace('alexa_', '', $message)));
+        } else {
+            $bot->reply($apiReply);
+        }
+    } else {
+        $bot->reply($apiReply);
+    }
     
-    $bot->reply($apiReply);
 })->middleware($dialogflow);
