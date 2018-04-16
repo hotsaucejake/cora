@@ -43,6 +43,17 @@
             margin: 10px;
         }
 
+        .policy {
+            margin-top: 30px;
+        }
+
+        .policy a {
+            font-size: 1rem;
+            text-decoration: none;
+            color: #aaa;
+            margin: 10px;
+        }
+
         @media all and (max-width: 500px) {
 
             .links {
@@ -60,10 +71,11 @@
         </div>
 
         <div class="links">
-            <a href="/botman/tinker">Tinker</a>
-            <a href="https://github.com/hotsaucejake/cora/wiki" target="_blank">Documentation</a>
-            <a href="https://github.com/hotsaucejake/cora" target="_blank">GitHub</a>
             <a href="{{ url('auth/azure') }}">Login</a>
+        </div>
+        <div class="policy">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
         </div>
     </div>
 
